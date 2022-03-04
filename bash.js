@@ -1,16 +1,18 @@
-
+const pwd = require('./pwd');
+const ls = require('./ls');
+const cat = require('./cat');
 
 process.stdout.write('prompt > ');
-
 process.stdin.on('data', (data) => {
-  const cmd = data.toString().trim();
-
-  if (cmd === 'pwd') {
-    console.log(process.cwd())
-    process.stdout.write('\nprompt > ');
-  } else {
-    process.stdout.write('You typed: ' + cmd);
-    process.stdout.write('\nprompt > ');
+    const string = data.toString().split(' ');
+    let cmd
+    let arg
+        
+  if(string.length ===1){
+    cmd = string[0];
+    pwd(cmd);
+  } else{
+    arg = string[1]
+    cat(arg.trim());
   }
-  //if (cmd === 'pwd') {console.dir(object.pathName)}
 })
